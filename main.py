@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import marker
-from routes import items
+from routes import marker, address
+
 from db.db import init_db
 
 app = FastAPI(title="HTV Project API")
@@ -19,8 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(marker.router)
-app.include_router(items.router)
-
+app.include_router(address.router)
 @app.get("/")
 async def root():
     return {"message": "Welcome to HTV Project API"}

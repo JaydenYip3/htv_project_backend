@@ -14,16 +14,12 @@ class Address(SQLModel, table=True):
     # Back reference to markers
     markers: List["Marker"] = Relationship(back_populates="address")
 
-class Item(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    name: str
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-
 class Marker(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     position: Any = Field(sa_column=Column(JSON))
     description: str
     title: str
+    urgency: str
     category: str
     timestamp: datetime = Field(default_factory=datetime.utcnow)
     status: str = Field(default="dead")
