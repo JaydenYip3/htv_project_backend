@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import points
+from routes import items
+from db.db import init_db
 
 app = FastAPI(title="HTV Project API")
+
+# Initialize database
+init_db()
 
 # Configure CORS
 app.add_middleware(
@@ -14,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(points.router)
+app.include_router(items.router)
 
 @app.get("/")
 async def root():
