@@ -12,5 +12,5 @@ class Marker(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     position: Any = Field(sa_column=Column(JSON))
     animal: str
-    timestamp: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
     status: str = Field(default="dead")

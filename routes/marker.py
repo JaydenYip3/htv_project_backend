@@ -3,6 +3,7 @@ from sqlmodel import Session
 from db.db import get_session
 from db.models import Marker
 from schemas.marker import Marker as MarkerSchema
+import datetime
 
 router = APIRouter()
 
@@ -20,7 +21,11 @@ def get_marker(marker_id: int, session: Session = Depends(get_session)):
 
 @router.post("/marker")
 def create_marker(marker: MarkerSchema, session: Session = Depends(get_session)):
-    new_marker = Marker(**marker.dict())
+    new_marker = Marker(
+        position=marker.position,
+        animal=marker.animal,
+        status=marker.status
+    )
     session.add(new_marker)
     session.commit()
     session.refresh(new_marker)
@@ -31,7 +36,7 @@ def update_marker(marker_id: int, marker: MarkerSchema, session: Session = Depen
     existing_marker = session.get(Marker, marker_id)
     if not existing_marker:
         return {"message": f"Marker {marker_id} not found"}
-    for key, value in marker.dict().items():
+    for key, value in marker.model_dump().items():
         setattr(existing_marker, key, value)
     session.add(existing_marker)
     session.commit()
