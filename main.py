@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import marker, address
+from routes import marker, address, gemini
 
 from db.db import init_db
 
@@ -20,6 +20,8 @@ app.add_middleware(
 
 app.include_router(marker.router)
 app.include_router(address.router)
+app.include_router(gemini.router)
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to HTV Project API"}
