@@ -17,4 +17,3 @@ class MarkerStatus(str, Enum):
     PENDING = "Pending"
     IN_PROGRESS = "In Progress"
     RESOLVED = "Resolved"
-    CLOSED = "Closed"
