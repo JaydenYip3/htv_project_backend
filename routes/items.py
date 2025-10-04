@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlmodel import Session
 from db.db import get_session
 from db.models import Item
-from base_models.constants import ItemCreate
+from schemas.item import ItemCreate
 
 router = APIRouter()
 

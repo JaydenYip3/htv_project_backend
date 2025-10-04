@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import points
+from routes import marker
 from routes import items
 from db.db import init_db
 
@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(points.router)
+app.include_router(marker.router)
 app.include_router(items.router)
 
 @app.get("/")
